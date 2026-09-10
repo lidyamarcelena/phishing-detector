@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Phishing Detector</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+<div class="card">
+    <h1>Phishing Detector</h1>
+
+<!-- URL BERWARNA -->
+<div class="url-preview">
+    <span class="scheme-text">https://</span><span class="subdomain-text">www.</span><span class="domain-text">example</span><span class="tld-text">.com</span><span class="path-text">/path</span>
+</div>
+
+<!-- BOX -->
+<div class="url-structure">
+
+    <div class="box scheme">
+        <span class="label">Scheme</span>
+        <div class="value">https://</div>
+    </div>
+
+    <div class="box subdomain">
+        <span class="label">Subdomain</span>
+        <div class="value">www</div>
+    </div>
+
+    <div class="box domain">
+        <span class="label">Domain</span>
+        <div class="value">example</div>
+    </div>
+
+    <div class="box tld">
+        <span class="label">TLD</span>
+        <div class="value">.com</div>
+    </div>
+
+    <div class="box path">
+        <span class="label">Path</span>
+        <div class="value">/path</div>
+    </div>
+
+</div>
+
+<p class="info-text">
+    Pastikan tautanmu sudah sesuai dengan struktur.
+</p>
+
+<!-- FORM -->
+<form method="POST">
+    <input type="text" name="url" placeholder="Masukkan URL..." required>
+    <button type="submit" id="btn">Cek URL</button>
+</form>
+
+{% if request.form.get('url') %}
+<div class="checked-url">
+    <span>URL yang diperiksa:</span>
+    <p>{{ request.form.get('url') }}</p>
+</div>
+{% endif %}
+
+<!-- LOADING -->
+<div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>Processing...</p>
+</div>
+
+<!-- RESULT -->
+{% if result %}
+    {% if result.error %}
+        <div class="result phishing">
+            {{ result.error }}
+        </div>
+    {% else %}
+        <div class="result {{ 'phishing' if result.status == 'PHISHING' else 'legit' }}">
+            {{ result.status }} ({{ result.confidence }}%)
+        </div>
+    {% endif %}
+{% endif %}
+
+</div>
+
+<!-- MODAL YES / NO -->
+
+<div class="modal" id="confirmModal">
+    <div class="modal-content">
+        <p>Apakah tautan sudah sesuai dengan struktur?</p>
+
+    <div class="modal-buttons">
+        <button type="button" class="yes-btn" id="yesBtn">Yes</button>
+        <button type="button" class="no-btn" id="noBtn">No</button>
+    </div>
+</div>
+
+</div>
+
+<script>
+const form = document.querySelector("form");
+const modal = document.getElementById("confirmModal");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const btn = document.getElementById("btn");
+const loading = document.getElementById("loading");
+
+// intercept submit → munculin modal dulu
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    modal.style.display = "flex";
+});
+
+// YES → lanjut submit
+yesBtn.addEventListener("click", function() {
+    modal.style.display = "none";
+
+    loading.style.display = "block";
+    btn.disabled = true;
+    btn.innerText = "Processing...";
+
+    form.submit();
+});
+
+// NO → batal
+noBtn.addEventListener("click", function() {
+    modal.style.display = "none";
+});
+</script>
+
+</body>
+</html>
