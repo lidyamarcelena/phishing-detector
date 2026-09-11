@@ -2,7 +2,7 @@
 Phishing Detector is a **machine learning-based web application** designed to detect phishing URLs. It extracts and analyzes URL features and uses the **Random Forest algorithm** to classify URLs as **legitimate** or **phishing**.
 
 ## Dataset
-The dataset used in this project was obtained from the following sources:
+The dataset used in this project serves as the training data for the machine learning models to learn patterns and characteristics that distinguish legitimate URLs from phishing URLs. The dataset was obtained from the following sources:
 1. **Legitimate URLs**  
    Legitimate URLs were collected through a crawling process from the **Majestic Million** dataset.
 2. **Phishing URLs**  
