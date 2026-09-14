@@ -5,10 +5,10 @@ Phishing Detector is a **machine learning-based web application** designed to de
 The dataset used in this project serves as the training data for the machine learning models to learn patterns and characteristics that distinguish legitimate URLs from phishing URLs. The dataset was obtained from the following sources:
 
  **1. Legitimate URLs**
-   Legitimate URLs were collected through a crawling process from the **Majestic Million** dataset.
+ Legitimate URLs were collected through a crawling process from the **Majestic Million** dataset.
    
- **2. Phishing URLs**  
-   Phishing URLs were obtained from **PhishTank**, a community-driven platform that provides verified phishing URL data.
+ **2. Phishing URLs**
+ Phishing URLs were obtained from **PhishTank**, a community-driven platform that provides verified phishing URL data.
 
 All data collection processes were conducted on **January 2, 2026**.
 
