@@ -6,6 +6,7 @@ The dataset used in this project serves as the training data for the machine lea
 
  **1. Legitimate URLs**
  Legitimate URLs were collected through a crawling process from the **Majestic Million** dataset.
+ 
  **2. Phishing URLs**
  Phishing URLs were obtained from **PhishTank**, a community-driven platform that provides verified phishing URL data.
 
